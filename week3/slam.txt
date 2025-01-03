@@ -1,0 +1,27 @@
+rviz 키기
+ros2 launch turtlebot4_viz view_robot.launch.py namespace:=/bot1
+
+rviz에서 2D pose estimate 설정
+
+맵 저장 
+ros2 run nav2_map_server map_saver_cli -f ~/map2
+
+keyboard teleop
+ros2 run teleop_twist_keyboard teleop_twist_keyboard —ros-args cmd_vel:=/bot1/cmd_vel
+
+slam 노드
+ros2 launch turtlebot4_navigation slam.launch.py namespace:=/bot1 params:="[경로]/slam.yaml"
+
+nav2 노드
+ros2 launch turtlebot4_navigation nav2.launch.py namespace:=/bot1 params_file:='[경로]/nav2.yaml'
+#nav2_new.yaml
+실행파일 실행
+/usr/bin/python3.10 [경로]/explore_with_boundary.py
+
+
+inflation_radius: 0.3 얼마나 벌려놓을지 (255-0)
+scaling factor: cost 변화율의 기울기
+
+cost 맵을 이해해야함....
+
+18:12 >> nav2.yaml
